@@ -11,13 +11,12 @@ exports.getAllTravelers = async (req, res) => {
   }
 };
 
-// POST /travelers
+// POST /travelers - NE TREBA VIŠE ID!
 exports.addTraveler = async (req, res) => {
   try {
-    const { id, name, age } = req.body;
-    // ili: Traveler.create(req.body) ako objekat direktno mapira
-    await Traveler.create({ id, name, age });
-    res.status(201).json({ message: 'Traveler added successfully.' });
+    const { name, age } = req.body;
+    const newTraveler = await Traveler.create({ name, age });
+    res.status(201).json({ message: 'Traveler added successfully.', traveler: newTraveler });
   } catch (err) {
     res.status(500).json({ message: 'Error adding traveler', error: err.message });
   }
@@ -36,7 +35,7 @@ exports.updateTraveler = async (req, res) => {
 
     traveler.name = name;
     traveler.age = age;
-    await traveler.save(); // ili traveler.update({ name, age })
+    await traveler.save();
 
     res.json({ message: 'Traveler updated successfully.' });
   } catch (err) {
