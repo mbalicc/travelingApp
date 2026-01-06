@@ -4,8 +4,9 @@ const sequelize = require('../database');
 
 const Trip = sequelize.define('Trip', {
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true  // Auto-generisanje ID-a
   },
   destination: {
     type: DataTypes.STRING,
@@ -15,9 +16,15 @@ const Trip = sequelize.define('Trip', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  travelerId: {
-    type: DataTypes.STRING, // ili DataTypes.INTEGER
-    allowNull: false
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    comment: 'URL slike destinacije'
+  },
+  agencyId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    comment: 'ID agencije koja nudi putovanje'
   }
 }, {
   tableName: 'trips',
