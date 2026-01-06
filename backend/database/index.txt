@@ -1,0 +1,18 @@
+const { Sequelize } = require('sequelize');
+
+// Kreirajte novu Sequelize instancu, zamijenite vrijednosti sa svojim kredencijalima
+const sequelize = new Sequelize('your_database_name', 'your_username', 'your_password', {
+  host: 'localhost', // ili gdje vam je hostana baza
+  dialect: 'postgres'
+});
+
+// Testiranje konekcije
+sequelize.authenticate()
+  .then(() => {
+    console.log('Uspješno povezan na PostgreSQL bazu!');
+  })
+  .catch((err) => {
+    console.error('Greška pri povezivanju na bazu:', err);
+  });
+
+module.exports = sequelize;
